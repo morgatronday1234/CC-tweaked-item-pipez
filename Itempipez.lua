@@ -1,10 +1,11 @@
+DEBUG = false
 function move(input, output, nameFilter, inSlotFilter, outSlotFilter)
  assert(type(input) == "string", "Argument #1: Expected string(side), Got: "..tostring(input))
  assert(type(output) == "string", "Argument #2: Expected string(side), Got: "..tostring(input))
  --assert(type(filter) == "table")
  
  --print("Moving items from: '"..input.."' To: '"..output.."'")
- inputPer = peripheral.wrap(input)
+ local inputPer = peripheral.wrap(input)
 
  assert(type(inputPer) == "table", "Argument #1: Expected peripheral, Got: '"..tostring(input).."'\n(Warning this may no-longer be a peripheral!)")
  
@@ -20,12 +21,15 @@ function move(input, output, nameFilter, inSlotFilter, outSlotFilter)
   if (outSlotFilter) and (type(outSlotFilter) == "number") then
    toSlot = outSlotFilter
   end 
-  dataPerSlot = inputPer.getItemDetail(fromSlot)
-
+  dataPerSlot = inputPer.getItemDetail(fromSlot) 
+  
+  --if (DEBUG) then print(nameFilter, dataPerSlot) end
+  
   if (nameFilter) and (dataPerSlot) and (dataPerSlot.displayName == nameFilter) then
-   return true, inputPer.pushItems(output, fromSlot, 64, toSlot)
+   return true, inputPer.pushItems(output, fromSlot, 128, toSlot)
   elseif (nameFilter == nil) then
-   return true, inputPer.pushItems(output, fromSlot, 64, toSlot)
+   
+   return true, inputPer.pushItems(output, fromSlot, 128, toSlot)
   end
   return false, "failed to move anything"
  end
@@ -43,6 +47,6 @@ end
 function main() while(true) do
 
 end end
---main() 
+main() 
 --Val if you want to run this code without startup remove the comment above this one to call main().
 --If you want to run this with startup just comment out it once more.
