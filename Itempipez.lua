@@ -12,16 +12,16 @@ function move(input, output, nameFilter, inSlotFilter, outSlotFilter)
 
  assert(type(inputPer) == "table", "Argument #1: Expected peripheral, Got: '"..tostring(input).."'\n(Warning this may no-longer be a peripheral!)")
  
+ if (inSlotFilter) and (type(inSlotFilter) == "number") then
+  fromSlot = inSlotFilter
+ end
+ if (outSlotFilter) and (type(outSlotFilter) == "number") then
+  toSlot = outSlotFilter
+ end
  
  for fromSlot, _ in pairs(inputPer.list()) do
   dataPerSlot = inputPer.getItemDetail(fromSlot)
-  
-  if (inSlotFilter) and (type(inSlotFilter) == "number") then
-   fromSlot = inSlotFilter
-  end
-  if (outSlotFilter) and (type(outSlotFilter) == "number") then
-   toSlot = outSlotFilter
-  end
+
   
   if (nameFilter) and (dataPerSlot) and (dataPerSlot.displayName == nameFilter) then
    inputPer.pushItems(output, fromSlot, 64, toSlot)
