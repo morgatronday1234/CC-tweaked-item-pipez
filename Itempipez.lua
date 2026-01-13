@@ -51,10 +51,7 @@ end
 function main() while(true) do
 
 end end
-main() 
---Val if you want to run this code without startup remove the comment above this one to call main().
---If you want to run this with startup just comment out it once more.
-
+--main() 
 --This project is under the CC-BY-4.0 license
 --https://github.com/morgatronday1234
 --Read the license!
